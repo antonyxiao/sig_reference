@@ -1,9 +1,8 @@
 <!-- 
 @author Antony Xiao <antonyxiao16@gmail.com>
  
-last change: 8/19/2022
-- added placeholder text in input bar
-- code formatting
+last change: 23/02/2023
+-- commenting
  
 Open Source
 -->
@@ -588,38 +587,49 @@ const sig = {
  
 document.getElementById('input').focus();
  
-function update() { 
-    const val = document.querySelector('input').value.toUpperCase(); 
-    var words = val.split(' '); 
-    var result = '';
-    var result2 = '';
- 
-    for (var i = 0; i < words.length; i++) {
- 
-    if (sig[words[i]]) { 
+function update() {
+    // Get the input value and convert it to uppercase
+    const val = document.querySelector('input').value.toUpperCase();
+
+    // Split the input value into an array of words
+    const words = val.split(' ');
+
+    // Initialize variables for the result
+    let result = '';
+    let result2 = '';
+
+    // Loop through each word in the input
+    for (let i = 0; i < words.length; i++) {
+        // If the word is in the 'sig' object, replace it with the corresponding value
+        if (sig[words[i]]) {
             result += sig[words[i]];
-        } else { 
+        } else {
             result += words[i];
-        }// else
-        result += ' '; 
- 
-        for (var key in sig) {
-            if ((key.includes(words[i]) && key.length >= words[i].length && words[i] != '' && words.length == 1)
+        }
+        result += ' ';
+
+        // Loop through each key in the 'sig' object
+        for (const key in sig) {
+            // If the key includes the current word and is longer than the word, or if the value includes the input value
+            if ((key.includes(words[i]) && key.length >= words[i].length && words[i] !== '' && words.length === 1)
                 || (sig[key].includes(val) && sig[key].length >= val.length)) {
- 
-                var temp = key + '&nbsp;&nbsp;:&nbsp&nbsp;' + sig[key] + '<br>';
- 
+
+                // Create a temporary string with the key and value separated by a colon
+                const temp = `${key}&nbsp;&nbsp;:&nbsp&nbsp;${sig[key]}<br>`;
+
+                // If the result2 variable doesn't already include the temporary string, add it
                 if (!result2.includes(temp)) {
                     result2 += temp;
-                }// if
- 
-            }// if
-        }// for
-    }// for
- 
+                }
+            }
+        }
+    }
+
+    // Set the innerHTML of the 'field' and 'field2' elements to the result strings
     document.getElementById('field').innerHTML = result;
-    document.getElementById('field2').innerHTML = result2; 
-}// update 
+    document.getElementById('field2').innerHTML = result2;
+}
+
  
 </script> 
 </body> 
